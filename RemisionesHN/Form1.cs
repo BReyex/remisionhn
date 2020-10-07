@@ -20,9 +20,19 @@ namespace RemisionesHN
         {
             public static string CodRemision;
         }
-        public Form1(string corem)
+        public static class Servidor
+        {
+            public static string urlServidor;
+        }
+        public static class Base
+        {
+            public static string Basedatos;
+        }
+        public Form1(string corem,string arg, string bd)
         {
             Remision.CodRemision = corem;
+            Servidor.urlServidor = arg;
+            Base.Basedatos = bd;
             InitializeComponent();
         }
 
@@ -33,7 +43,7 @@ namespace RemisionesHN
 
          
 
-            using (SqlConnection conn2 = new SqlConnection("Data Source=192.168.7.2;Initial Catalog=EXACTUS;Persist Security Info=True;User ID=sa;Password=jda"))
+            using (SqlConnection conn2 = new SqlConnection("Data Source="+Servidor.urlServidor+";Initial Catalog="+Base.Basedatos+";Persist Security Info=True;User ID=sa;Password=jda"))
             {
 
 
@@ -126,6 +136,11 @@ namespace RemisionesHN
             //cryRpt.SetParameterValue("Factura", "REM15449");
             //crystalReportViewer1.ReportSource = cryRpt;
             //crystalReportViewer1.Refresh();
+        }
+
+        private void crystalReportViewer1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
